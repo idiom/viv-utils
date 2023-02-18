@@ -88,13 +88,13 @@ def loadWorkspaceFromViv(vw: Workspace, viv_file):
         vw.loadWorkspace(viv_file)
 
 
-def getWorkspace(fp: str, analyze=True, reanalyze=False, verbose=False, should_save=True) -> Workspace:
+def getWorkspace(fp: str, analyze=True, reanalyze=False, verbose=False, should_save=True, confdir=None) -> Workspace:
     """
     For a file path return a workspace, it will create one if the extension
     is not .viv, otherwise it will load the existing one. Reanalyze will cause
     it to create and save a new one.
     """
-    vw = Workspace()
+    vw = Workspace(confdir=confdir)
     vw.verbose = verbose
     # this is pretty insane, but simply prop assignment doesn't work.
     vw.config.getSubConfig("viv").getSubConfig("parsers").getSubConfig("pe")["loadresources"] = True
